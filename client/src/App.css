@@ -36,3 +36,52 @@
     transform: rotate(360deg);
   }
 }*/
+
+body {
+	font-size: 62.5%;
+}
+
+.home-screen {
+	margin: auto;
+	width: 60%;
+}
+
+.home-screen-header {
+	display: flex;
+	margin-top: 2.5%;
+	margin-bottom: 2.5%;
+}
+
+.checkmark-logo {
+	margin-top: 2.5%;
+	margin-bottom: 2.5%;
+	margin-right: 0%;
+	margin-left: 1.5%;
+	height: 4.75em;
+}
+
+.problem-list {
+	margin: 0;
+	width: 100%;
+}
+
+.enter-solution-modal {
+	margin: auto;
+	width: 60%;
+}
+
+.primary-header {
+	margin-top: 2.5%;
+	margin-bottom: 2.5%;
+	margin-right: 0%;
+	margin-left: 0%;
+	font-size: 4.0em;
+}
+
+.secondary-header {
+	margin-top: 0%;
+	margin-bottom: 2.5%;
+	margin-right: 0%;
+	margin-left: 0%;
+	font-size: 2.4em;
+}
