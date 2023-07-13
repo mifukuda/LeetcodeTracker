@@ -52,16 +52,27 @@ body {
 	margin-bottom: 2.5%;
 }
 
+.home-screen-subheader {
+	display: flex;
+	margin-top: 0%;
+	margin-bottom: 2.5%;
+	margin-right: 0%;
+	margin-left: 0%;
+}
+
 .checkmark-logo {
 	margin-top: 2.5%;
 	margin-bottom: 2.5%;
-	margin-right: 0%;
+	margin-right: 0;
 	margin-left: 1.5%;
 	height: 4.75em;
 }
 
 .problem-list {
-	margin: 0;
+	margin-top: 2.5%;
+	margin-bottom: 10%;
+	margin-right: 0;
+	margin-left: 0;
 	width: 100%;
 }
 
@@ -79,9 +90,5 @@ body {
 }
 
 .secondary-header {
-	margin-top: 0%;
-	margin-bottom: 2.5%;
-	margin-right: 0%;
-	margin-left: 0%;
-	font-size: 2.4em;
+	font-size: 2.8em;
 }

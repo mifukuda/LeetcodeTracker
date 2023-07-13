@@ -3,10 +3,10 @@ import Card from 'react-bootstrap/Card';
 
 export default function ProblemCard() {
     return(
-        <div className="problem-list">
+        <div>
             <Card style={{width: '100%'}}>
                 <Card.Body>
-                    <Card.Title>Card Title</Card.Title>
+                    <Card.Title>1. Two Sum</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
                     <Card.Text>
                         Some quick example text to build on the card title and make up the
