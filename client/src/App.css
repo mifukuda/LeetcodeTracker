@@ -92,3 +92,16 @@ body {
 .secondary-header {
 	font-size: 2.8em;
 }
+
+.card:hover {
+	background-color: rgb(221, 221, 221);
+}
+
+.textbox {
+	font-size: 1.4em;
+}
+
+.add-tag-form {
+	display: flex;
+	margin-bottom: 2.5%;
+}

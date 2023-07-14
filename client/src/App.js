@@ -1,6 +1,6 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { WelcomeScreen, EnterSolutionModal, HomeScreen } from './components';
+import { WelcomeScreen, EnterSolutionModal, HomeScreen, ProblemScreen } from './components';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
@@ -9,6 +9,7 @@ function App() {
 			<Routes>
 				<Route path="/" element={<WelcomeScreen/>}/> 
 				<Route path="/home" element={<HomeScreen/>}/>
+				<Route path="/problem/:id" element={<ProblemScreen/>}/>
 				<Route path="/entersolution" element={<EnterSolutionModal/>}/>
 			</Routes>
 		</BrowserRouter>
