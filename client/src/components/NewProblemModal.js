@@ -30,15 +30,15 @@ export default function NewProblemModal(props) {
                 <Form.Label>Tags</Form.Label>
                 <div className="add-tag-form">
                     <Form.Control type="text" placeholder="Enter a tag..." style={{marginRight: "2.5%"}}/>
-                    <Button variant="primary" style={{width: "25%"}}>Add</Button>
+                    <Button variant="dark" style={{width: "25%"}}>Add</Button>
                 </div>
                 <p>Enter problem text:</p>
                 <ReactQuill theme="snow" style={formStyle}/>
             </Modal.Body>
 
             <Modal.Footer>
-                <Button variant="secondary" onClick={() => props.handleClose()}>Close</Button>
-                <Button variant="primary">Save changes</Button>
+                <Button variant="secondary" style={{width: "15%"}} onClick={() => props.handleClose()}>Close</Button>
+                <Button variant="primary" style={{width: "15%"}}>Save</Button>
             </Modal.Footer>
         </Modal>
     )
