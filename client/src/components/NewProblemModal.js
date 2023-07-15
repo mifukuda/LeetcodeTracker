@@ -6,6 +6,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
 export default function NewProblemModal(props) {
+    
     const formStyle = {
         marginBottom: "2.5%"
     }
