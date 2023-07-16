@@ -11,9 +11,10 @@
 const auth = require('../auth');
 const express = require('express');
 const UserController = require('../controllers/user-controller');
+const ProblemController = require('../controllers/problem-controller');
 const router = express.Router();
 
-// router.post('/top5list', auth.verify, Top5ListController.createTop5List)
+router.post('/problem', auth.verify, ProblemController.createProblem);
 // router.put('/top5list/:id', auth.verify, Top5ListController.updateTop5List)
 // router.delete('/top5list/:id', auth.verify, Top5ListController.deleteTop5List)
 // router.get('/top5list/:id', auth.verify, Top5ListController.getTop5ListById)

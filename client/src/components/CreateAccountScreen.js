@@ -2,16 +2,22 @@ import React, { useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { registerUser } from "../api";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateAccountScreen() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
     function handleClick() {
         try {
             registerUser({
                 email: email,
                 password: password
+            }).then((response) => {
+                if(response.status === 200) {
+                    navigate("/home/");
+                }
             });
         } catch (err) {
             console.log(err);

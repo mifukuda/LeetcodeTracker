@@ -9,8 +9,7 @@ const ProblemSchema = new Schema(
         difficulty: {type: Number, required: true},
         description: {type: String, required: true},
         solutions: {type: [String], required: true},
-        ownerEmail: { type: String, required: true},
-        ownerUsername: { type: String, required: true}
+        ownerEmail: { type: String, required: true}
     },
     { timestamps: true },
 )

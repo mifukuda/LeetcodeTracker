@@ -5,7 +5,8 @@ const ObjectId = Schema.Types.ObjectId
 const UserSchema = new Schema(
     {
         email: { type: String, required: true },
-        passwordHash: { type: String, required: true }
+        passwordHash: { type: String, required: true },
+        problems: {type: [ObjectId], required: true}
     },
     { timestamps: true },
 )
