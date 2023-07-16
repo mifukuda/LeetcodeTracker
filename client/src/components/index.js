@@ -6,6 +6,7 @@ import NewProblemModal from "./NewProblemModal";
 import ProblemCard from "./ProblemCard";
 import ProblemList from "./ProblemList";
 import ProblemScreen from "./ProblemScreen";
+import SuccessModal from "./SuccessModal";
 import WelcomeScreen from "./WelcomeScreen";
 
 export {
@@ -17,5 +18,6 @@ export {
     ProblemCard,
     ProblemList,
     ProblemScreen,
+    SuccessModal,
     WelcomeScreen
 }
