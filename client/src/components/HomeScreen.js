@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ProblemList, NewProblemModal, SuccessModal } from ".";
+import { ProblemList, NewProblemModal } from ".";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { getAllProblems } from "../api";

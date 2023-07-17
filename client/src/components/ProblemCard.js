@@ -1,9 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Card from 'react-bootstrap/Card';
+import { useDispatch } from "react-redux";
+import { setCurrentProblem } from "../actions";
 
 export default function ProblemCard(props) {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const difficulties = ["None", "Easy", "Medium", "Hard"];
     const colors = ["gray", "green", "yellow", "red"];
     const problem = props.problem;
@@ -13,7 +16,8 @@ export default function ProblemCard(props) {
     }
 
     function handleClick() {
-        navigate("/problem/2347918347");
+        dispatch(setCurrentProblem(problem));
+        navigate("/problem/" + problem._id);
     }
 
     return(
@@ -24,6 +28,7 @@ export default function ProblemCard(props) {
                 </Card.Header>
                 <Card.Body>
                     <Card.Subtitle className="mb-2" style={difficultyColor}>{difficulties[problem.difficulty]}</Card.Subtitle>
+                    <Card.Subtitle className="mb-2 text-muted">{problem.solutions.length} solutions</Card.Subtitle>
                     <Card.Text>
                         {problem.description.substring(0, 380)}...
                     </Card.Text>

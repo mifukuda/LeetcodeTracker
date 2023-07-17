@@ -8,7 +8,7 @@ function App() {
 		<BrowserRouter>
 			<Routes>
 				<Route path="/" element={<WelcomeScreen/>}/>
-				<Route path="/create" element={<CreateAccountScreen/>}/>
+				<Route path="/creat\e" element={<CreateAccountScreen/>}/>
 				<Route path="/login" element={<LoginScreen/>}/>
 				<Route path="/home" element={<HomeScreen/>}/>
 				<Route path="/problem/:id" element={<ProblemScreen/>}/>
