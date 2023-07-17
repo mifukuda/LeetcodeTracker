@@ -2,8 +2,15 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Card from 'react-bootstrap/Card';
 
-export default function ProblemCard() {
+export default function ProblemCard(props) {
     const navigate = useNavigate();
+    const difficulties = ["None", "Easy", "Medium", "Hard"];
+    const colors = ["gray", "green", "yellow", "red"];
+    const problem = props.problem;
+
+    const difficultyColor = {
+        color: colors[problem.difficulty]
+    }
 
     function handleClick() {
         navigate("/problem/2347918347");
@@ -11,17 +18,20 @@ export default function ProblemCard() {
 
     return(
         <div>
-            <Card onClick={() => handleClick()} style={{width: '100%', cursor: "pointer", marginBottom:"2.5%"}}>
+            <Card onClick={() => handleClick()} style={{width: '100%', cursor: "pointer", marginBottom:"1%"}}>
+                <Card.Header>
+                    <Card.Title style={{marginBottom: "0"}}>{problem.number}. {problem.name}</Card.Title>
+                </Card.Header>
                 <Card.Body>
-                    <Card.Title>1. Two Sum</Card.Title>
-                    <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
+                    <Card.Subtitle className="mb-2" style={difficultyColor}>{difficulties[problem.difficulty]}</Card.Subtitle>
                     <Card.Text>
-                        Some quick example text to build on the card title and make up the
-                        bulk of the card's content.
+                        {problem.description.substring(0, 380)}...
                     </Card.Text>
+                </Card.Body>
+                <Card.Footer>
                     <Card.Link href="#">Card Link</Card.Link>
                     <Card.Link href="#">Another Link</Card.Link>
-                </Card.Body>
+                </Card.Footer>
             </Card>
         </div>
     )

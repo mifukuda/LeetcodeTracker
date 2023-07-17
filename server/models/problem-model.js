@@ -8,6 +8,7 @@ const ProblemSchema = new Schema(
         tags: {type: [String], required: true},
         difficulty: {type: Number, required: true},
         description: {type: String, required: true},
+        html: {type: String, required: true},
         solutions: {type: [String], required: true},
         ownerEmail: { type: String, required: true}
     },

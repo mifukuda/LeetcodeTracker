@@ -12,6 +12,7 @@ export default function NewProblemModal(props) {
     const [name, setName] = useState("");
     const [difficulty, setDifficulty] = useState(1);
     const [description, setDescription] = useState("");
+    const [html, setHtml] = useState("");
     const [success, setSuccess] = useState(false);
 
     function handleClick() {
@@ -21,7 +22,8 @@ export default function NewProblemModal(props) {
                 name: name,
                 tags: [],
                 difficulty: difficulty,
-                description: description
+                description: description,
+                html: html
             }).then((response) => {
                 if(response.status === 201) {
                     props.handleClose();
@@ -46,7 +48,8 @@ export default function NewProblemModal(props) {
     }
 
     function handleChangeDescription(content, delta, source, editor) {
-        setDescription(content);
+        setDescription(editor.getText());
+        setHtml(content);
     }
 
     function closeSuccessModal() {

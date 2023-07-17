@@ -1,10 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ProblemList, NewProblemModal, SuccessModal } from ".";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { getAllProblems } from "../api";
 
 export default function HomeScreen() {
     const [show, setShow] = useState(false);
+    const [problems, setProblems] = useState([]);
+
+    useEffect(() => {
+        try {
+            getAllProblems ()
+            .then((response) => {
+                if(response.status === 200) {
+                    console.log(response.data.data);
+                    setProblems(response.data.data);
+                }
+            });
+        } catch (err) {
+            console.log(err);
+        }
+    }, []);
 
     function handleClose() {
         setShow(false);
@@ -29,7 +45,7 @@ export default function HomeScreen() {
                 <Form.Label>Search</Form.Label>
                 <Form.Control size="lg" type="text" placeholder="Search by name, tag, or difficulty..."/>
             </div>
-            <ProblemList/>
+            <ProblemList problems={problems}/>
         </div>
     )
 }

@@ -6,6 +6,7 @@ const api = axios.create({
 })
 
 export const createProblem = (payload) => api.post(`/problem/`, payload);
+export const getAllProblems = () => api.get(`/problems/`);
 
 export const getLoggedIn = () => api.get(`/loggedIn/`);
 export const registerUser = (payload) => api.post(`/register/`, payload)
@@ -14,6 +15,7 @@ export const logoutUser = () => api.get(`/logout/`)
 
 const apis = {
     createProblem,
+    getAllProblems,
 
     getLoggedIn,
     registerUser,

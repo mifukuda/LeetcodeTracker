@@ -18,7 +18,7 @@ router.post('/problem', auth.verify, ProblemController.createProblem);
 // router.put('/top5list/:id', auth.verify, Top5ListController.updateTop5List)
 // router.delete('/top5list/:id', auth.verify, Top5ListController.deleteTop5List)
 // router.get('/top5list/:id', auth.verify, Top5ListController.getTop5ListById)
-// router.get('/top5lists', Top5ListController.getTop5Lists)
+router.get('/problems', auth.verify, ProblemController.getProblems);
 // router.get('/top5listpairs', auth.verify, Top5ListController.getTop5ListPairs)
 // router.get('/top5listcurrent', auth.verify, Top5ListController.getCurrentLists)
 // router.get('/top5listuser/:id', Top5ListController.getUserLists)
