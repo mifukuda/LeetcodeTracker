@@ -126,6 +126,11 @@ body {
 	font-size: 2.8em;
 }
 
+.tertiary-header {
+	margin-bottom: 2%;
+	margin-top: 2%;
+}
+
 .card:hover {
 	background-color: rgb(221, 221, 221);
 }
@@ -144,4 +149,19 @@ body {
 	margin-top: 2.5%;
 	text-align: center;
 	font-size: 1.4em;
+}
+
+.ql-container {
+    font-size: 20px !important;
+}
+
+.solution-list-header {
+	display: flex;
+	margin-bottom: 2%;
+}
+
+.solution-list {
+	height: 1000px;
+	margin-bottom: 10%;
+	background-color: orange;
 }
