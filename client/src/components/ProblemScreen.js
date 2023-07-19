@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from "react";
 import Button from 'react-bootstrap/Button';
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.bubble.css';
 import { useSelector, useDispatch } from 'react-redux';
@@ -44,18 +46,34 @@ export default function ProblemScreen() {
             <div className="home-screen-subheader">
                 <h2 className="secondary-header">{problem.number}. {problem.name} <span style={{color: colors[problem.difficulty]}}>({difficulties[problem.difficulty]})</span></h2>
             </div>
+            <Tabs
+                defaultActiveKey="0"
+                justify
+            >
+                <Tab eventKey="0" title="Description">
+                    <div className="problem-description">
+                        <h3 className="tertiary-header">Description</h3>
+                        <ReactQuill theme="bubble" readOnly={true} style={{height: '700px', border: '1px solid black', marginBottom: '2.5%'}} defaultValue={problem.html}/>
+                        <div className="edit-button">
+                            <Button variant="success" size="lg" style={{display: "block", marginLeft: "auto", marginRight: "0", width: "20%", fontWeight: "bold"}}>&#9998; Edit</Button>
+                        </div>
+                    </div>
+                </Tab>
+                <Tab eventKey="1" title="Solutions">
+                    <div className="problem-solutions">
+                        <h3 className="tertiary-header">Solutions</h3>
+                        <div className="solution-list-header">
+                            <h3>{problem.solutions.length} solutions</h3>
+                            <Button variant="dark" size="lg" style={{width:"20%", marginLeft: "auto", fontWeight:"bold"}} onClick={() => handleShow()}>New (+)</Button>
+                        </div>
+                        <SolutionList/>
+                    </div>
+                </Tab>
+                <Tab eventKey="2" title="Tests">
+                    Tab content for Loooonger Tab
+                </Tab>
+            </Tabs>
             {/* <ReactQuill theme="snow" style={formStyle} onChange={(content, delta, source, editor) => handleChangeDescription(content, delta, source, editor)}/> */}
-            <h3 className="tertiary-header">Description: </h3>
-            <ReactQuill theme="bubble" readOnly={true} style={{height: '700px', border: '1px solid black', marginBottom: '2.5%'}} defaultValue={problem.html}/>
-            <div className="edit-button">
-                <Button variant="success" size="lg" style={{display: "block", marginLeft: "auto", marginRight: "0", width: "20%", fontWeight: "bold"}}>&#9998; Edit</Button>
-            </div>
-            <h3 className="tertiary-header">Solutions: </h3>
-            <div className="solution-list-header">
-                <h3>{problem.solutions.length} solutions</h3>
-                <Button variant="dark" size="lg" style={{width:"20%", marginLeft: "auto", fontWeight:"bold"}} onClick={() => handleShow()}>New (+)</Button>
-            </div>
-            <SolutionList/>
         </div>
     )
 }
