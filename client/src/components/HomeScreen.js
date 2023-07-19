@@ -9,17 +9,15 @@ export default function HomeScreen() {
     const [problems, setProblems] = useState([]);
 
     useEffect(() => {
-        try {
-            getAllProblems ()
-            .then((response) => {
-                if(response.status === 200) {
-                    console.log(response.data.data);
-                    setProblems(response.data.data);
-                }
-            });
-        } catch (err) {
-            console.log(err);
-        }
+        getAllProblems ()
+        .then((response) => {
+            if(response.status === 200) {
+                console.log(response.data.data);
+                setProblems(response.data.data);
+            }
+        }).catch((error) => {
+            console.log(error);
+        })
     }, []);
 
     function handleClose() {
@@ -30,9 +28,21 @@ export default function HomeScreen() {
          setShow(true);
     }
 
+    function updateList() {
+        getAllProblems ()
+        .then((response) => {
+            if(response.status === 200) {
+                console.log(response.data.data);
+                setProblems(response.data.data);
+            }
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
+
     return(
         <div className="home-screen">
-            <NewProblemModal show={show} handleClose={handleClose}/>
+            <NewProblemModal show={show} handleClose={handleClose} updateList={updateList}/>
             <div className="home-screen-header">
                 <h1 className="primary-header">LeetCode Tracker</h1>
                 <img className="checkmark-logo" src={require('../images/checkmark.png')} alt="checkmark"/>

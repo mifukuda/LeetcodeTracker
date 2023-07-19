@@ -1,16 +1,42 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import Button from 'react-bootstrap/Button';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.bubble.css';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { EnterSolutionModal, SolutionList } from ".";
+import { getProblemById } from "../api";
+import { setCurrentProblem, setCurrentSolutions } from "../actions";
 
 export default function ProblemScreen() {
     const problem = useSelector(state => state.currentProblem);
+    const dispatch = useDispatch();
+    const [show, setShow] = useState(false);
     const difficulties = ["None", "Easy", "Medium", "Hard"];
-    const colors = ["gray", "green", "yellow", "red"];
+    const colors = ["gray", "green", "orange", "red"];
+
+    useEffect(() => {
+        getProblemById(problem._id)
+        .then((response) => {
+            if(response.status === 200) {
+                dispatch(setCurrentProblem(response.data.problem));
+                dispatch(setCurrentSolutions(response.data.solutions));
+            }
+        }).catch((error) => {
+            console.log(error);
+        })
+    }, []);
+
+    function handleClose() {
+        setShow(false);
+    }
+
+    function handleShow() {
+         setShow(true);
+    }
     
     return(
         <div className="home-screen">
+            <EnterSolutionModal show={show} handleClose={handleClose}/>
             <div className="home-screen-header">
                 <h1 className="primary-header">LeetCode Tracker</h1>
                 <img className="checkmark-logo" src={require('../images/checkmark.png')} alt="checkmark"/>
@@ -27,11 +53,9 @@ export default function ProblemScreen() {
             <h3 className="tertiary-header">Solutions: </h3>
             <div className="solution-list-header">
                 <h3>{problem.solutions.length} solutions</h3>
-                <Button variant="dark" size="lg" style={{width:"20%", marginLeft: "auto", fontWeight:"bold"}}>NEW SOLUTION (+)</Button>
+                <Button variant="dark" size="lg" style={{width:"20%", marginLeft: "auto", fontWeight:"bold"}} onClick={() => handleShow()}>New (+)</Button>
             </div>
-            <div className="solution-list">
-                hello
-            </div>
+            <SolutionList/>
         </div>
     )
 }

@@ -127,6 +127,7 @@ body {
 }
 
 .tertiary-header {
+	font-size: 2.2em;
 	margin-bottom: 2%;
 	margin-top: 2%;
 }
@@ -157,11 +158,29 @@ body {
 
 .solution-list-header {
 	display: flex;
+	align-items: center;
 	margin-bottom: 2%;
 }
 
 .solution-list {
-	height: 1000px;
 	margin-bottom: 10%;
-	background-color: orange;
 }
+
+.solution-card-header {
+	font-size: 1.4em;
+}
+
+.solution-card-subheader {
+	margin-bottom: 2%;
+}
+
+.run-button {
+	display: flex;
+	margin-top: 2%;
+}
+
+.modal-90w {
+	min-width: 60%;
+}
+
+.cm-editor { border: 1px solid black }

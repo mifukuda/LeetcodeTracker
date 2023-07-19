@@ -1,19 +1,30 @@
 import React from 'react';
 import Accordion from 'react-bootstrap/Accordion';
+import Button from 'react-bootstrap/Button';
+import CodeMirror from '@uiw/react-codemirror';
+import { python } from '@codemirror/lang-python';
 
-export default function AlwaysOpenExample() {
-  return (
-    <Accordion.Item eventKey="0">
-        <Accordion.Header>Accordion Item #1</Accordion.Header>
-        <Accordion.Body>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-            minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-        </Accordion.Body>
-    </Accordion.Item>
-  );
+export default function SolutionCard(props) {
+    const solution = props.solution;
+    const extensions = [python()];
+
+    return (
+        <Accordion.Item eventKey="0">
+            <Accordion.Header><h4 className="solution-card-header">{solution.number}. {solution.name}</h4></Accordion.Header>
+            <Accordion.Body>
+                <h5 className="solution-card-subheader">Time Complexity: <i>{solution.timeComplexity}</i></h5>
+                <h5 className="solution-card-subheader">Space Complexity: <i>{solution.spaceComplexity}</i></h5>
+                <h5 className="solution-card-subheader">Code:</h5>
+                <CodeMirror
+                    height="500px"
+                    extensions={extensions}
+                    value={solution.code}
+                    // onChange={(value, viewUpdate) => {handleChangeCode(value, viewUpdate)}}
+                />
+                <div className="run-button">
+                    <Button variant="dark" size="lg" style={{display: "block", marginLeft: "auto", marginRight: "0", width: "20%", fontWeight: "bold"}}>&#10145; Run</Button>
+                </div>
+            </Accordion.Body>
+        </Accordion.Item>
+    );
 }

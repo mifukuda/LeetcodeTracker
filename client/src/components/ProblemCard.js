@@ -8,7 +8,7 @@ export default function ProblemCard(props) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const difficulties = ["None", "Easy", "Medium", "Hard"];
-    const colors = ["gray", "green", "yellow", "red"];
+    const colors = ["gray", "green", "orange", "red"];
     const problem = props.problem;
 
     const difficultyColor = {

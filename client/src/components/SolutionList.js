@@ -1,13 +1,20 @@
 import React from "react";
-import { ProblemCard } from ".";
-import Accordion from 'react-bootstrap/Accordion';
+import Accordion from "react-bootstrap/Accordion";
+import { SolutionCard } from ".";
+import { useSelector } from "react-redux";
 
 export default function SolutionList(props) {
-    const list = props.problems.map((problem, index) => 
-        <ProblemCard key={index} problem={problem}/>
-    )
+    const solutions = useSelector(state => state.currentSolutions);
+
+    const list = solutions.map((solution, index) => 
+        <SolutionCard key={index} solution={solution}/>
+    );
+
     return(
-        <Accordion defaultActiveKey={['0']} alwaysOpen>
-        </Accordion>
+        <div className="solution-list">
+            <Accordion defaultActiveKey="0">
+                {list}
+            </Accordion>
+        </div>
     )
 }

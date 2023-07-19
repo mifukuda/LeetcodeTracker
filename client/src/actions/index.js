@@ -4,3 +4,10 @@ export const setCurrentProblem = (problem) => {
         payload: problem
     }
 }
+
+export const setCurrentSolutions = (solutions) => {
+    return {
+        type: 'SET_CURRENT_SOLUTIONS',
+        payload: solutions
+    }
+}

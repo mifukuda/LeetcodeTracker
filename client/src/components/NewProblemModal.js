@@ -53,6 +53,7 @@ export default function NewProblemModal(props) {
     }
 
     function closeSuccessModal() {
+        props.updateList();
         setSuccess(false);
     }
 
