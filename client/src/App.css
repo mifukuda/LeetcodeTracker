@@ -217,3 +217,14 @@ body {
 	font-size: 1.4em;
 	margin-bottom: 2%;
 }
+
+.terminal {
+	width: 100%;
+	padding: 4%;
+	margin-top: 2.5%;
+	margin-bottom: 2%;
+	white-space: pre-line;
+	border-radius: 1%;
+	color: white;
+	background-color: black;
+}

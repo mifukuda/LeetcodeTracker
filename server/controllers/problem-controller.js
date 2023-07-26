@@ -1,6 +1,7 @@
 const Problem = require('../models/problem-model');
 const Solution = require('../models/solution-model');
 const User = require('../models/user-model');
+const fs = require('fs'); 
 const jwt = require("jsonwebtoken");
 const { exec } = require("child_process");
 
@@ -139,7 +140,6 @@ getProblems = async (req, res) => {
 // get problem and corresponding solutions by problem ID
 getProblemById = async (req, res) => {
     try {
-        console.log(req.params);
         let problem = await Problem.findOne({ _id: req.params.id });
         if (!problem) {
             return res
@@ -154,19 +154,70 @@ getProblemById = async (req, res) => {
 }
 
 getOutput = async (req, res) => {
-    exec("pytest ./user_files/test_sample.py", (error, stdout, stderr) => {
-        // if (error) {
-        //     console.log(`error: ${error.message}`);
-        //     return;
-        // }
-        // if (stderr) {
-        //     console.log(`stderr: ${stderr}`);
-        //     return;
-        // }
-        console.log(`error: ${error.message}`);
-        console.log(`stderr: ${stderr}`);
-        console.log(`stdout: ${stdout}`);
+    // Need unique ID of user for filename
+    const user = await User.findOne({ email: req.userEmail });
+    if(!user) {
+        return res.status(400).json({
+            success: false,
+            error: 'Incorrect user.'
+        })
+    }
+
+    const problem = await Problem.findOne({ _id: req.query.problemId});
+    if(!problem || problem.ownerEmail !== req.userEmail) {
+        return res.status(400).json({
+            success: false,
+            error: 'Specified problem does not exist.'
+        })
+    }
+
+    const solution = await Solution.findOne({ _id: req.query.solutionId});
+    if(!solution || !solution.problemId.equals(problem._id)) {
+        return res.status(400).json({
+            success: false,
+            error: 'Specified solution does not exist.'
+        })
+    }
+
+    // Create directory if it doesn't exist
+    if (!fs.existsSync(`${user._id}`)){
+        fs.mkdirSync(`${user._id}`);
+    }
+
+    const solutionFile = `./${user.id}/solution.py`
+    const test = problem.test;
+    const testFile = `./${user.id}/test.py`
+
+    // Create solution file and test file
+    fs.writeFile(solutionFile, solution.code, function (err) {
+        if (err) throw err;
+        console.log('Solution file successfully created!');
+    }); 
+
+    fs.writeFile(testFile, test, function (err) {
+        if (err) throw err;
+        console.log('Test file successfully created!');
+    }); 
+
+    const command = `pytest ${testFile}`
+    exec(command, (error, stdout, stderr) => {
+        if (stderr) {
+            console.log(`stderr: ${stderr}`);
+            return res.status(200).json({ success: true, output: stderr});
+        }
+        if(stdout) {
+            console.log(`stdout: ${stdout}`);
+            return res.status(200).json({ success: true, output: stdout });
+        }
+        if (error) {
+            console.log(`error: ${error.message}`);
+            return res.status(400).json({
+                success: false,
+                error: 'Command failed.'
+            })
+        }
     });
+
 }
 
 module.exports = {
@@ -177,3 +228,4 @@ module.exports = {
     createTest,
     getOutput
 }
+

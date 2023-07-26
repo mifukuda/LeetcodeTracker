@@ -1,12 +1,40 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Accordion from 'react-bootstrap/Accordion';
 import Button from 'react-bootstrap/Button';
 import CodeMirror from '@uiw/react-codemirror';
 import { python } from '@codemirror/lang-python';
+import { useSelector } from 'react-redux';
+import { getOutput } from "../api";
 
 export default function SolutionCard(props) {
-    const solution = props.solution;
     const extensions = [python()];
+
+    const solution = props.solution;
+    const problem = useSelector(state => state.currentProblem);
+    const [showTerminal, setShowTerminal] = useState(false);
+    const [terminalText, setTerminalText] = useState("");
+
+    // Run the solution on backend and display output
+    function handleClick() {
+        getOutput(problem._id, solution._id)
+        .then((response) => {
+            if(response.status === 200) {
+                console.log(response.data);
+                setShowTerminal(true);
+                setTerminalText(new Date().toLocaleString() + "\nRunning Tests...\n\n" + response.data.output);
+            }
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
+
+    let terminal = null;
+    if(showTerminal) {
+        terminal =
+        <div className="terminal">
+            {terminalText}
+        </div>
+    }
 
     return (
         <Accordion.Item eventKey={props.index}>
@@ -22,8 +50,9 @@ export default function SolutionCard(props) {
                     // onChange={(value, viewUpdate) => {handleChangeCode(value, viewUpdate)}}
                 />
                 <div className="run-button">
-                    <Button variant="dark" size="lg" style={{display: "block", marginLeft: "auto", marginRight: "0", width: "20%", fontWeight: "bold"}}>&#10145; Run</Button>
+                    <Button variant="dark" size="lg" style={{display: "block", marginLeft: "auto", marginRight: "0", width: "20%", fontWeight: "bold"}} onClick={() => {handleClick()}}>&#10145; Run</Button>
                 </div>
+                {terminal}
             </Accordion.Body>
         </Accordion.Item>
     );

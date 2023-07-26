@@ -77,8 +77,8 @@ export default function ProblemScreen() {
         }).then((response) => {
             if(response.status === 201) {
                 dispatch(setCurrentProblem(response.data.problem));
-                handleEditingTests(false);
                 setActualTest(test);
+                handleEditingTests(false);
             }
         }).catch((error) => {
             console.log(error);
@@ -148,7 +148,7 @@ export default function ProblemScreen() {
                         />
                         <div className="edit-button">
                             {editingTests ? editToolbar : <div className="save-cancel-buttons"></div>}
-                            <Button variant="success" size="lg" disabled={editingTests} style={{width: "20%", fontWeight: "bold"}} onClick={() => handleEditingTests(true)}>&#9998; Edit</Button>
+                            <Button variant="primary" size="lg" disabled={editingTests} style={{width: "20%", fontWeight: "bold"}} onClick={() => handleEditingTests(true)}>&#9998; Edit</Button>
                         </div>
                     </div>
                 </Tab>

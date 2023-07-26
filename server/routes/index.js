@@ -26,7 +26,7 @@ router.get('/problems', auth.verify, ProblemController.getProblems);
 // router.get('/top5listuser/:id', Top5ListController.getUserLists)
 // router.get('/top5listcommunity/:id', Top5ListController.getCommunityListByName)
 // router.get('/top5listcommunity', Top5ListController.getCommunityLists)
-router.get('/output', ProblemController.getOutput);
+router.get('/output', auth.verify, ProblemController.getOutput);
 
 router.post('/register', UserController.registerUser);
 router.get('/loggedIn', UserController.getLoggedIn);

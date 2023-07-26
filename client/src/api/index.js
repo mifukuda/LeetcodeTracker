@@ -10,6 +10,7 @@ export const getAllProblems = () => api.get(`/problems/`);
 export const getProblemById = (id) => api.get(`/problem/${id}`);
 export const createSolution = (payload) => api.post(`/solution`, payload);
 export const createTest = (payload) => api.post(`/test`, payload);
+export const getOutput = (problemId, solutionId) => api.get(`/output/`, {params: {problemId: problemId, solutionId: solutionId}});
 
 export const getLoggedIn = () => api.get(`/loggedIn/`);
 export const registerUser = (payload) => api.post(`/register/`, payload)
@@ -22,6 +23,7 @@ const apis = {
     getProblemById,
     createSolution,
     createTest,
+    getOutput,
 
     getLoggedIn,
     registerUser,
