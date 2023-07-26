@@ -37,7 +37,7 @@ app.get('/', (req, res) => {
 	res.send("Hello");
 });
 
-app.get('/getAllProblems', (req, res) => {
+app.get('/test', (req, res) => {
     res.send("Hello");
 });
  

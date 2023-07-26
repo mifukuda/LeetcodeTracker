@@ -8,6 +8,7 @@ export default function HomeScreen() {
     const [show, setShow] = useState(false);
     const [problems, setProblems] = useState([]);
 
+    // Load all problems from backend
     useEffect(() => {
         getAllProblems ()
         .then((response) => {
@@ -20,6 +21,7 @@ export default function HomeScreen() {
         })
     }, []);
 
+    // Displaying and closing NewProblemModal
     function handleClose() {
         setShow(false);
     }
@@ -28,6 +30,7 @@ export default function HomeScreen() {
          setShow(true);
     }
 
+    // Fetch and display all problems after a new problem is added
     function updateList() {
         getAllProblems ()
         .then((response) => {

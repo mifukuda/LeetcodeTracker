@@ -9,7 +9,7 @@ export default function SolutionCard(props) {
     const extensions = [python()];
 
     return (
-        <Accordion.Item eventKey="0">
+        <Accordion.Item eventKey={props.index}>
             <Accordion.Header><h4 className="solution-card-header">{solution.number}. {solution.name}</h4></Accordion.Header>
             <Accordion.Body>
                 <h5 className="solution-card-subheader">Time Complexity: <i>{solution.timeComplexity}</i></h5>

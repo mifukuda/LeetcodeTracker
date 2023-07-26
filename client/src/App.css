@@ -194,3 +194,26 @@ body {
 	margin-top: 5%;
 	margin-bottom: 10%;
 }
+
+.problem-tests {
+	margin-top: 5%;
+	margin-bottom: 10%;
+}
+
+.edit-button {
+	display: flex;
+	justify-content: right;
+	margin-top: 2.5%;
+}
+
+.save-cancel-buttons {
+	display: flex;
+	justify-content: right;
+	width: 100%;
+	margin-right: 2%;
+}
+
+.explanation-text {
+	font-size: 1.4em;
+	margin-bottom: 2%;
+}

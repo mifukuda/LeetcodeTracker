@@ -11,3 +11,10 @@ export const setCurrentSolutions = (solutions) => {
         payload: solutions
     }
 }
+
+export const addSolution = (solution) => {
+    return {
+        type: 'ADD_SOLUTION',
+        payload: solution
+    }
+}

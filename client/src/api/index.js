@@ -9,6 +9,7 @@ export const createProblem = (payload) => api.post(`/problem/`, payload);
 export const getAllProblems = () => api.get(`/problems/`);
 export const getProblemById = (id) => api.get(`/problem/${id}`);
 export const createSolution = (payload) => api.post(`/solution`, payload);
+export const createTest = (payload) => api.post(`/test`, payload);
 
 export const getLoggedIn = () => api.get(`/loggedIn/`);
 export const registerUser = (payload) => api.post(`/register/`, payload)
@@ -20,6 +21,7 @@ const apis = {
     getAllProblems,
     getProblemById,
     createSolution,
+    createTest,
 
     getLoggedIn,
     registerUser,

@@ -15,6 +15,7 @@ export default function ProblemCard(props) {
         color: colors[problem.difficulty]
     }
 
+    // Navigate to ProblemScreen; set currentProblem state
     function handleClick() {
         dispatch(setCurrentProblem(problem));
         navigate("/problem/" + problem._id);

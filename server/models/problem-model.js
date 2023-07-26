@@ -10,6 +10,7 @@ const ProblemSchema = new Schema(
         description: {type: String, required: true},
         html: {type: String, required: true},
         solutions: {type: [String], required: true},
+        test: {type: String, required: true},
         ownerEmail: { type: String, required: true}
     },
     { timestamps: true },

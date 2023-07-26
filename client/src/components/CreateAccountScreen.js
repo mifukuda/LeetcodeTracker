@@ -9,6 +9,7 @@ export default function CreateAccountScreen() {
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
+    // Register user in backend; redirect to home screen if successful
     function handleClick() {
         try {
             registerUser({

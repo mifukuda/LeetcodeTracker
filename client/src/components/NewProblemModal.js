@@ -15,6 +15,7 @@ export default function NewProblemModal(props) {
     const [html, setHtml] = useState("");
     const [success, setSuccess] = useState(false);
 
+    // Save problem in backend
     function handleClick() {
         try {
             createProblem ({
@@ -26,6 +27,7 @@ export default function NewProblemModal(props) {
                 html: html
             }).then((response) => {
                 if(response.status === 201) {
+                    // Update redux state to include new problem
                     props.handleClose();
                     setSuccess(true);
                 }
@@ -52,6 +54,7 @@ export default function NewProblemModal(props) {
         setHtml(content);
     }
 
+    // Update problem list on HomeScreen and close modal
     function closeSuccessModal() {
         props.updateList();
         setSuccess(false);

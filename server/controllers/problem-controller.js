@@ -2,6 +2,7 @@ const Problem = require('../models/problem-model');
 const Solution = require('../models/solution-model');
 const User = require('../models/user-model');
 const jwt = require("jsonwebtoken");
+const { exec } = require("child_process");
 
 createProblem = (req, res) => {
     const body = req.body;
@@ -19,6 +20,7 @@ createProblem = (req, res) => {
 
     problem.ownerEmail = req.userEmail;
     problem.solutions = [];
+    problem.test = "# DO NOT DELETE THIS LINE\nfrom solution import Solution\n";
     console.log("creating problem: " + JSON.stringify(problem));
 
     problem
@@ -47,7 +49,7 @@ createSolution = async (req, res) => {
         })
     }
 
-    let problem = await Problem.findOne({ _id: req.body.problemId});
+    const problem = await Problem.findOne({ _id: req.body.problemId});
     if(!problem || problem.ownerEmail !== req.userEmail) {
         return res.status(400).json({
             success: false,
@@ -71,6 +73,7 @@ createSolution = async (req, res) => {
                 return res.status(201).json({
                     success: true,
                     solution: solution,
+                    problem: problem,
                     message: 'New Solution Created!'
                 })
             })
@@ -79,6 +82,42 @@ createSolution = async (req, res) => {
             return res.status(400).json({
                 error,
                 message: 'New Solution Not Created!'
+            })
+        })
+}
+
+createTest = async (req, res) => {
+    const body = req.body;
+    if (!body) {
+        return res.status(400).json({
+            success: false,
+            error: 'Missing request body.',
+        })
+    }
+
+    let problem = await Problem.findOne({ _id: req.body.problemId});
+    if(!problem || problem.ownerEmail !== req.userEmail) {
+        return res.status(400).json({
+            success: false,
+            error: 'Specified problem does not exist.'
+        })
+    }
+
+    problem.test = req.body.test;
+
+    problem
+        .save()
+        .then(() => {
+            return res.status(201).json({
+                success: true,
+                problem: problem,
+                message: 'New Test Added!'   
+            })
+        })
+        .catch(error => {
+            return res.status(400).json({
+                error,
+                message: 'New Test Added!'
             })
         })
 }
@@ -114,9 +153,27 @@ getProblemById = async (req, res) => {
     }
 }
 
+getOutput = async (req, res) => {
+    exec("pytest ./user_files/test_sample.py", (error, stdout, stderr) => {
+        // if (error) {
+        //     console.log(`error: ${error.message}`);
+        //     return;
+        // }
+        // if (stderr) {
+        //     console.log(`stderr: ${stderr}`);
+        //     return;
+        // }
+        console.log(`error: ${error.message}`);
+        console.log(`stderr: ${stderr}`);
+        console.log(`stdout: ${stdout}`);
+    });
+}
+
 module.exports = {
     createProblem,
     getProblems,
     getProblemById,
-    createSolution
+    createSolution,
+    createTest,
+    getOutput
 }

@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { SuccessModal } from '.';
 import CodeMirror from '@uiw/react-codemirror';
 import { python } from '@codemirror/lang-python';
@@ -7,9 +7,11 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { createSolution } from "../api";
+import { setCurrentProblem, addSolution } from "../actions";
 
 // Screen for pasting solution into textbox and saving
 export default function EnterSolutionModal(props) {
+    const dispatch = useDispatch();
     const [number, setNumber] = useState("");
     const [name, setName] = useState("");
     const [timeComplexity, setTimeComplexity] = useState("");
@@ -19,6 +21,7 @@ export default function EnterSolutionModal(props) {
     const extensions = [python()];
     const problem = useSelector(state => state.currentProblem);
 
+    // Create solution in backend
     function handleClick() {
         createSolution({
             problemId: problem._id,
@@ -29,6 +32,8 @@ export default function EnterSolutionModal(props) {
             code: code
         }).then((response) => {
             if(response.status === 201) {
+                dispatch(setCurrentProblem(response.data.problem));
+                dispatch(addSolution(response.data.solution));
                 props.handleClose();
                 setSuccess(true);
             }

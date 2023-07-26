@@ -7,12 +7,12 @@ export default function SolutionList(props) {
     const solutions = useSelector(state => state.currentSolutions);
 
     const list = solutions.map((solution, index) => 
-        <SolutionCard key={index} solution={solution}/>
+        <SolutionCard key={index} index={index} solution={solution}/>
     );
 
     return(
         <div className="solution-list">
-            <Accordion defaultActiveKey="0">
+            <Accordion defaultActiveKey={[0]} alwaysOpen>
                 {list}
             </Accordion>
         </div>
