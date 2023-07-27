@@ -11,6 +11,9 @@ export default function NewProblemModal(props) {
     const [number, setNumber] = useState("");
     const [name, setName] = useState("");
     const [difficulty, setDifficulty] = useState(1);
+    // value in textbox
+    const [currentTag, setCurrentTag] = useState("");
+    const [tags, setTags] = useState([]);
     const [description, setDescription] = useState("");
     const [html, setHtml] = useState("");
     const [success, setSuccess] = useState(false);
@@ -49,24 +52,56 @@ export default function NewProblemModal(props) {
         setDifficulty(event.target.value);
     }
 
+    function handleChangeCurrentTag(event) {
+        setCurrentTag(event.target.value);
+    }
+
+    function handleChangeTags() {
+        setTags([...tags, currentTag]);
+    }
+
     function handleChangeDescription(content, delta, source, editor) {
         setDescription(editor.getText());
         setHtml(content);
     }
 
-    // Update problem list on HomeScreen and close modal
+    // Update problem list on HomeScreen and close SuccessModal
     function closeSuccessModal() {
         props.updateList();
         setSuccess(false);
     }
 
+    function handleClose() {
+        setTags([]);
+        props.handleClose();
+    }
+
+    function handleRemoveTag(index, event) {
+        event.preventDefault();
+        setTags(tags.filter((tag, tagIndex) => { 
+            return tagIndex !== index;
+        }));
+    }
+
     const formStyle = {
         marginBottom: "2.5%"
     }
+
+    let tagContainer = tags.map((tag, index) => 
+        <div className="tag-container" key={index} onClick={(event) => handleRemoveTag(index, event)}>
+            {tag}
+        </div>
+    );
+
+    let tagList =
+        <div className="tag-list">
+            <p>Hover over tag and click to remove:</p>
+            {tagContainer}
+        </div>
     
     return(
         <div>
-            <Modal size="lg" centered backdrop="static" show={props.show} onHide={() => props.handleClose()}>
+            <Modal size="lg" centered backdrop="static" show={props.show} onHide={() => handleClose()}>
                 <Modal.Header closeButton>
                     <Modal.Title>Add New Problem</Modal.Title>
                 </Modal.Header>
@@ -84,15 +119,16 @@ export default function NewProblemModal(props) {
                     </Form.Select>
                     <Form.Label>Tags</Form.Label>
                     <div className="add-tag-form">
-                        <Form.Control type="text" placeholder="Enter a tag..." style={{marginRight: "2.5%"}}/>
-                        <Button variant="dark" style={{width: "25%"}}>Add</Button>
+                        <Form.Control type="text" placeholder="Enter a tag..." style={{marginRight: "2.5%"}} onChange={(event) => handleChangeCurrentTag(event)}/>
+                        <Button variant="dark" style={{width: "25%"}} onClick={() => handleChangeTags()}>Add</Button>
                     </div>
+                    {tags.length ? tagList : null}
                     <p>Enter problem text:</p>
                     <ReactQuill theme="snow" style={formStyle} onChange={(content, delta, source, editor) => handleChangeDescription(content, delta, source, editor)}/>
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button variant="secondary" style={{width: "15%"}} onClick={() => props.handleClose()}>Close</Button>
+                    <Button variant="secondary" style={{width: "15%"}} onClick={() => handleClose()}>Close</Button>
                     <Button variant="primary" style={{width: "15%"}} onClick={() => handleClick()}>Save</Button>
                 </Modal.Footer>
             </Modal>

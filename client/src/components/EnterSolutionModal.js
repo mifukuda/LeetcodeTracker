@@ -17,6 +17,7 @@ export default function EnterSolutionModal(props) {
     const [timeComplexity, setTimeComplexity] = useState("");
     const [spaceComplexity, setSpaceComplexity] = useState("");
     const [code, setCode] = useState("");
+    // For showing SuccessModal
     const [success, setSuccess] = useState(false);
     const extensions = [python()];
     const problem = useSelector(state => state.currentProblem);

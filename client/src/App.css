@@ -228,3 +228,38 @@ body {
 	color: white;
 	background-color: black;
 }
+
+.no-data-message {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 10%;
+	font-size: 1.4em;
+}
+
+.tag-list {
+	margin-bottom: 1.5%;
+}
+
+.tag-list > * {
+	margin-right: 2%;
+	margin-bottom: 1%;
+}
+
+.tag-container {
+	display: inline-block;
+	height: 10%;
+	border: 1px solid rgb(10, 128, 197);
+	border-radius: 15px;
+	padding-top: 1%;
+	padding-bottom: 1%;
+	padding-right: 2.5%;
+	padding-left: 2.5%;
+	color: rgb(10, 128, 197);
+}
+
+.tag-container:hover {
+	background-color: red;
+	color: white;
+	border: 1px solid white;
+}

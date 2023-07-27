@@ -28,6 +28,9 @@ export default function SolutionCard(props) {
         })
     }
 
+    const dateCreated = new Date(solution.createdAt).toLocaleString();
+    const dateModified = new Date(solution.updatedAt).toLocaleString();
+
     let terminal = null;
     if(showTerminal) {
         terminal =
@@ -38,10 +41,12 @@ export default function SolutionCard(props) {
 
     return (
         <Accordion.Item eventKey={props.index}>
-            <Accordion.Header><h4 className="solution-card-header">{solution.number}. {solution.name}</h4></Accordion.Header>
+            <Accordion.Header>
+                <h4 className="solution-card-header">{solution.number}. {solution.name}</h4> 
+            </Accordion.Header>
             <Accordion.Body>
-                <h5 className="solution-card-subheader">Time Complexity: <i>{solution.timeComplexity}</i></h5>
-                <h5 className="solution-card-subheader">Space Complexity: <i>{solution.spaceComplexity}</i></h5>
+                <h5 className="solution-card-subheader">Created on: {dateCreated}; &emsp; Last modified: {dateModified}</h5>
+                <h5 className="solution-card-subheader">Time Complexity: {solution.timeComplexity}; &emsp; Space Complexity: {solution.spaceComplexity}</h5>
                 <h5 className="solution-card-subheader">Code:</h5>
                 <CodeMirror
                     height="500px"
