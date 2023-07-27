@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import CodeMirror from '@uiw/react-codemirror';
 import { python } from '@codemirror/lang-python';
 import { useSelector } from 'react-redux';
-import { getOutput } from "../api";
+import { getOutput, updateSolutionById } from "../api";
 
 export default function SolutionCard(props) {
     const extensions = [python()];
@@ -13,9 +13,15 @@ export default function SolutionCard(props) {
     const problem = useSelector(state => state.currentProblem);
     const [showTerminal, setShowTerminal] = useState(false);
     const [terminalText, setTerminalText] = useState("");
+    // value shown in CodeMirror
+    const [solutionText, setSolutionText] = useState(solution.code);
+    // value in database
+    const [actualSolutionText, setActualSolutionText] = useState(solution.code);
+    // editing CodeMirror
+    const [editingSolution, setEditingSolution] = useState(false);
 
     // Run the solution on backend and display output
-    function handleClick() {
+    function handleRun() {
         getOutput(problem._id, solution._id)
         .then((response) => {
             if(response.status === 200) {
@@ -27,6 +33,39 @@ export default function SolutionCard(props) {
             console.log(error);
         })
     }
+
+    function handleEdit() {
+        setEditingSolution(true);
+    }
+
+    function handleChangeSolution(value, viewUpdate) {
+        setSolutionText(value);
+    }
+
+    function handleClickCancel() {
+        setSolutionText(actualSolutionText);
+        setEditingSolution(false);
+    }
+
+    function handleClickSave() {
+        updateSolutionById(solution._id,
+                {
+                    code: solutionText
+                }
+            ).then((response) => {
+            if(response.status === 200) {
+                setActualSolutionText(solutionText);
+                setEditingSolution(false);
+            }
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
+
+    // Display if test-text is being edited
+    let saveButton = <Button variant="primary" size="lg" style={{width: "20%", fontWeight: "bold"}} onClick={() => handleClickSave()}>Save</Button>
+    let cancelButton = <Button variant="secondary" size="lg" style={{width: "20%", fontWeight: "bold"}} onClick={() => handleClickCancel()}>Cancel</Button>
+        
 
     const dateCreated = new Date(solution.createdAt).toLocaleString();
     const dateModified = new Date(solution.updatedAt).toLocaleString();
@@ -51,11 +90,15 @@ export default function SolutionCard(props) {
                 <CodeMirror
                     height="500px"
                     extensions={extensions}
-                    value={solution.code}
-                    // onChange={(value, viewUpdate) => {handleChangeCode(value, viewUpdate)}}
+                    value={solutionText}
+                    editable={editingSolution}
+                    onChange={(value, viewUpdate) => {handleChangeSolution(value, viewUpdate)}}
                 />
                 <div className="run-button">
-                    <Button variant="dark" size="lg" style={{display: "block", marginLeft: "auto", marginRight: "0", width: "20%", fontWeight: "bold"}} onClick={() => {handleClick()}}>&#10145; Run</Button>
+                    {editingSolution ? saveButton : null}
+                    {editingSolution ? cancelButton : null}
+                    <Button variant="primary" size="lg" style={{display: "block", width: "20%", fontWeight: "bold"}} disabled={editingSolution} onClick={() => {handleEdit()}}>&#9998; Edit</Button>
+                    <Button variant="dark" size="lg" style={{display: "block", width: "20%", fontWeight: "bold"}} disabled={editingSolution} onClick={() => {handleRun()}}>&#10145; Run</Button>
                 </div>
                 {terminal}
             </Accordion.Body>

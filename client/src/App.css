@@ -172,7 +172,12 @@ body {
 
 .run-button {
 	display: flex;
+	justify-content: right;
 	margin-top: 2%;
+}
+
+.run-button > * {
+	margin-left: 1%;
 }
 
 .modal-90w {
@@ -227,6 +232,7 @@ body {
 	border-radius: 1%;
 	color: white;
 	background-color: black;
+	font-family: "Lucida Console", "Courier New", monospace;
 }
 
 .no-data-message {
@@ -248,7 +254,6 @@ body {
 
 .tag-container {
 	display: inline-block;
-	height: 10%;
 	border: 1px solid rgb(10, 128, 197);
 	border-radius: 15px;
 	padding-top: 1%;
@@ -262,4 +267,16 @@ body {
 	background-color: red;
 	color: white;
 	border: 1px solid white;
+}
+
+.card-tag-container {
+	display: inline-block;
+	margin-right: 1%;
+	border: 1px solid rgb(10, 128, 197);
+	border-radius: 15px;
+	padding-top: 0.5%;
+	padding-bottom: 0.5%;
+	padding-right: 2.5%;
+	padding-left: 2.5%;
+	color: rgb(10, 128, 197);
 }

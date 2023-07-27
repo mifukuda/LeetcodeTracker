@@ -17,7 +17,7 @@ const router = express.Router();
 router.post('/problem', auth.verify, ProblemController.createProblem);
 router.post('/solution', auth.verify, ProblemController.createSolution);
 router.post('/test', auth.verify, ProblemController.createTest);
-// router.put('/top5list/:id', auth.verify, Top5ListController.updateTop5List)
+router.put('/solution/:id', auth.verify, ProblemController.updateSolution);
 // router.delete('/top5list/:id', auth.verify, Top5ListController.deleteTop5List)
 router.get('/problem/:id', auth.verify, ProblemController.getProblemById);
 router.get('/problems', auth.verify, ProblemController.getProblems);

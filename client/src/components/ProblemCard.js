@@ -21,6 +21,15 @@ export default function ProblemCard(props) {
         navigate("/problem/" + problem._id);
     }
 
+    let tagContainer = null;
+    if(problem.tags.length) {
+        tagContainer = problem.tags.map((tag, index) => 
+            <div className="card-tag-container" key={index}>
+                {tag}
+            </div>
+        );
+    }
+
     return(
         <div>
             <Card onClick={() => handleClick()} style={{width: '100%', cursor: "pointer", marginBottom:"1%"}}>
@@ -35,8 +44,7 @@ export default function ProblemCard(props) {
                     </Card.Text>
                 </Card.Body>
                 <Card.Footer>
-                    <Card.Link href="#">Card Link</Card.Link>
-                    <Card.Link href="#">Another Link</Card.Link>
+                    {tagContainer}
                 </Card.Footer>
             </Card>
         </div>

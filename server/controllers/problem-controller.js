@@ -87,6 +87,34 @@ createSolution = async (req, res) => {
         })
 }
 
+updateSolution = async (req, res) => {
+    const solution = await Solution.findOne({ _id: req.params.id});
+    if(!solution || solution.ownerEmail !== req.userEmail) {
+        return res.status(400).json({
+            success: false,
+            error: 'Specified solution does not exist.'
+        })
+    }
+
+    solution.code = req.body.code;
+    solution
+        .save()
+        .then(() => {
+            return res.status(200).json({
+                success: true,
+                solution: solution,
+                message: 'Solution updated!'
+                
+            })
+        })
+        .catch(error => {
+            return res.status(400).json({
+                error,
+                message: 'Solution not updated!'
+            })
+        })
+}
+
 createTest = async (req, res) => {
     const body = req.body;
     if (!body) {
@@ -226,6 +254,7 @@ module.exports = {
     getProblemById,
     createSolution,
     createTest,
-    getOutput
+    getOutput,
+    updateSolution
 }
 

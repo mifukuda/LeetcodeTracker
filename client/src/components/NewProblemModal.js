@@ -24,7 +24,7 @@ export default function NewProblemModal(props) {
             createProblem ({
                 number: number,
                 name: name,
-                tags: [],
+                tags: tags,
                 difficulty: difficulty,
                 description: description,
                 html: html
@@ -32,6 +32,7 @@ export default function NewProblemModal(props) {
                 if(response.status === 201) {
                     // Update redux state to include new problem
                     props.handleClose();
+                    props.updateList();
                     setSuccess(true);
                 }
             });
@@ -67,7 +68,6 @@ export default function NewProblemModal(props) {
 
     // Update problem list on HomeScreen and close SuccessModal
     function closeSuccessModal() {
-        props.updateList();
         setSuccess(false);
     }
 
