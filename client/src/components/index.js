@@ -6,6 +6,7 @@ import NewProblemModal from "./NewProblemModal";
 import ProblemCard from "./ProblemCard";
 import ProblemList from "./ProblemList";
 import ProblemScreen from "./ProblemScreen";
+import ProgressGraphs from "./ProgressGraphs";
 import SolutionCard from "./SolutionCard";
 import SolutionList from "./SolutionList";
 import SuccessModal from "./SuccessModal";
@@ -20,6 +21,7 @@ export {
     ProblemCard,
     ProblemList,
     ProblemScreen,
+    ProgressGraphs,
     SolutionCard,
     SolutionList,
     SuccessModal,

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ProblemList, NewProblemModal } from ".";
+import { ProblemList, NewProblemModal, ProgressGraphs } from ".";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { getAllProblems } from "../api";
@@ -49,6 +49,10 @@ export default function HomeScreen() {
             <div className="home-screen-header">
                 <h1 className="primary-header">LeetCode Tracker</h1>
                 <img className="checkmark-logo" src={require('../images/checkmark.png')} alt="checkmark"/>
+            </div>
+            <div className="home-screen-graphs">
+                <h2 className="secondary-header">Progress Graphs</h2>
+                <ProgressGraphs problems={problems}/>
             </div>
             <div className="home-screen-subheader">
                 <h2 className="secondary-header">Problem List</h2>

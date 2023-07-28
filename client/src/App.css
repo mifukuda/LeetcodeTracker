@@ -93,6 +93,27 @@ body {
 	margin-left: 0%;
 }
 
+.progress-graphs {
+	margin-top: 3%;
+	margin-bottom: 10%;
+}
+
+.graph-difficulty {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 3%;
+	height: 700px;
+}
+
+.graph-problems {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 3%;
+	height: 550px;
+}
+
 .checkmark-logo {
 	margin-top: 2.5%;
 	margin-bottom: 2.5%;

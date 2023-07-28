@@ -30,6 +30,8 @@ export default function ProblemCard(props) {
         );
     }
 
+    let date = new Date(problem.createdAt).toLocaleString().split(",")[0];
+
     return(
         <div>
             <Card onClick={() => handleClick()} style={{width: '100%', cursor: "pointer", marginBottom:"1%"}}>
@@ -37,8 +39,8 @@ export default function ProblemCard(props) {
                     <Card.Title style={{marginBottom: "0"}}>{problem.number}. {problem.name}</Card.Title>
                 </Card.Header>
                 <Card.Body>
-                    <Card.Subtitle className="mb-2" style={difficultyColor}>{difficulties[problem.difficulty]}</Card.Subtitle>
-                    <Card.Subtitle className="mb-2 text-muted">{problem.solutions.length} solutions</Card.Subtitle>
+                    <Card.Subtitle className="mb-2 text-muted"> <span style={difficultyColor}>{difficulties[problem.difficulty]}</span> ({problem.solutions.length} solutions)</Card.Subtitle>
+                    <Card.Subtitle className="mb-2 text-muted">Date created: {date}</Card.Subtitle>
                     <Card.Text>
                         {problem.description.substring(0, 380)}...
                     </Card.Text>
