@@ -44,13 +44,14 @@ export default function ProgressGraphs(props) {
                 currentDate = problemDate;
                 // push new date and set its count to previous date's count + 1
                 dateLabels.push(problemDate);
-                counts.push(counts[counts.length - 1] + 1);
+                // new date: previous date's count + 1 if solution exists, count if solution does not exist
                 if(sortedProblems[i].solutions.length) {
                     unsolvedCounts.push(counts[counts.length - 1] + 1);
                 }
                 else {
                     unsolvedCounts.push(counts[counts.length - 1]);
                 }
+                counts.push(counts[counts.length - 1] + 1);
             }
         }
     }
@@ -112,13 +113,16 @@ export default function ProgressGraphs(props) {
                     '#FFA500',
                     '#ed6161'
                 ],
-                borderWidth: 2
+                borderWidth: 3
             }
         ]
     }
 
     return(
         <div className="progress-graphs">
+            <p className="explanation-text" style={{marginBottom: "4%"}}> Your progress is visualized here! 
+                Click on the "Problems" tab to see the total number of problems you've solved and the trends in how many you solve each day.
+                Click on the "Difficulty" tab to see the proportions of problem difficulty.</p>
             <Tabs
                 defaultActiveKey="0"
                 justify

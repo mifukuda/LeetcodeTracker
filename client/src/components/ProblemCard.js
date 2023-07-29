@@ -1,6 +1,8 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 import { useDispatch } from "react-redux";
 import { setCurrentProblem } from "../actions";
 
@@ -34,9 +36,14 @@ export default function ProblemCard(props) {
 
     return(
         <div>
-            <Card onClick={() => handleClick()} style={{width: '100%', cursor: "pointer", marginBottom:"1%"}}>
+            <Card style={{width: '100%', marginBottom:"1%"}}>
                 <Card.Header>
-                    <Card.Title style={{marginBottom: "0"}}>{problem.number}. {problem.name}</Card.Title>
+                    <Card.Title>
+                        <a className="card-title-link" onClick={() => handleClick()}>
+                            {problem.number}. {problem.name}
+                        </a>
+                        <Button variant="secondary" style={{marginLeft: "auto", marginRight: 0, paddingRight: 5, paddingLeft: 5, paddingBottom: 0, paddingTop: 0}}>&#10005;</Button>
+                    </Card.Title>
                 </Card.Header>
                 <Card.Body>
                     <Card.Subtitle className="mb-2 text-muted"> <span style={difficultyColor}>{difficulties[problem.difficulty]}</span> ({problem.solutions.length} solutions)</Card.Subtitle>

@@ -37,8 +37,81 @@
   }
 }*/
 
+@font-face {
+    font-family: 'Furore';
+    src: url("./fonts/Furore.otf") format("opentype");
+}
+
 body {
 	font-size: 62.5%;
+}
+
+.welcome-screen {
+	width: 100%;
+	height: 100vh;
+}
+
+.welcome-screen-banner {
+	position: relative;
+	width: 100%;
+	height: 70%;
+}
+
+.welcome-screen-image {
+	object-fit: cover;
+	width: 100%;
+	height: 100%;
+}
+
+.welcome-screen-title {
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 3.6em;
+	color: white
+}
+
+.welcome-screen-options {
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 3%;
+}
+
+.welcome-screen-text {
+	text-align: center;
+	width: 50%;
+	font-size: 1.5em;
+	margin-bottom: 2.5%;
+}
+
+.welcome-screen-buttons {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	top: 75%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.welcome-screen-buttons > * {
+	margin-right: 0.5%;
+	margin-left: 0.5%;
+	font-family: 'Furore' !important;
+}
+
+.orange-button {
+	background-color: rgb(248, 156, 36) !important;
+	color: rgb(255, 255, 255) !important;
+	border: 1px solid rgb(248, 156, 36) !important;
+}
+
+.orange-button:hover {
+	background-color: rgb(250, 185, 64) !important;
 }
 
 .create-account-screen {
@@ -54,7 +127,7 @@ body {
 	align-items: center;
 	width: 45%;
 	height: 100vh;
-	background-image: linear-gradient(rgb(238, 202, 134), rgb(245, 162, 37));
+	background-image: linear-gradient(rgb(240, 181, 71), rgb(245, 162, 37));
 }
 
 .create-account-image-holder {
@@ -153,8 +226,28 @@ body {
 	margin-top: 2%;
 }
 
-.card:hover {
+/* .card:hover {
 	background-color: rgb(221, 221, 221);
+} */
+
+.card-title {
+	display: flex !important;
+	margin-bottom: 0 !important;
+}
+
+.card-title-link {
+	display: inline;
+	text-decoration: none;
+	cursor: pointer;
+	margin-bottom: 0 !important;
+	color: black;
+}
+
+.card-title-link:hover {
+	/* display: inline;
+	cursor: pointer; */
+	text-decoration: underline;
+	color: rgb(10, 128, 197)
 }
 
 .textbox {
