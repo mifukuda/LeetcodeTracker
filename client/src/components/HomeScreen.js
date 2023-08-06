@@ -47,8 +47,9 @@ export default function HomeScreen() {
         <div className="home-screen">
             <NewProblemModal show={show} handleClose={handleClose} updateList={updateList}/>
             <div className="home-screen-header">
-                <h1 className="primary-header">LeetCode Tracker</h1>
-                <img className="checkmark-logo" src={require('../images/checkmark.png')} alt="checkmark"/>
+                {/* <h1 className="primary-header">HaruCode</h1>
+                <img className="checkmark-logo" src={require('../images/checkmark.png')} alt="checkmark"/> */}
+                <img className="home-screen-logo" src={require('../images/logo3.png')} alt="logo"/>
             </div>
             <div className="home-screen-graphs">
                 <h2 className="secondary-header">Progress Graphs</h2>

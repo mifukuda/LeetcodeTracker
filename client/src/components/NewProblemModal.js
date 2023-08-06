@@ -8,31 +8,29 @@ import { createProblem } from "../api";
 import { SuccessModal } from ".";
 
 export default function NewProblemModal(props) {
-    const [number, setNumber] = useState("");
+    /*const [number, setNumber] = useState("");
     const [name, setName] = useState("");
-    const [difficulty, setDifficulty] = useState(1);
+    const [difficulty, setDifficulty] = useState(1);*/
     // value in textbox
     const [currentTag, setCurrentTag] = useState("");
     const [tags, setTags] = useState([]);
-    const [description, setDescription] = useState("");
-    const [html, setHtml] = useState("");
+    const [url, setUrl] = useState("");
+    /*const [description, setDescription] = useState("");
+    const [html, setHtml] = useState("");*/
     const [success, setSuccess] = useState(false);
 
     // Save problem in backend
     function handleClick() {
         try {
             createProblem ({
-                number: number,
-                name: name,
+                url: url,
                 tags: tags,
-                difficulty: difficulty,
-                description: description,
-                html: html
             }).then((response) => {
                 if(response.status === 201) {
                     // Update redux state to include new problem
                     props.handleClose();
                     props.updateList();
+                    setTags([]);
                     setSuccess(true);
                 }
             });
@@ -41,7 +39,7 @@ export default function NewProblemModal(props) {
         }
     }
 
-    function handleChangeNumber(event) {
+    /*function handleChangeNumber(event) {
         setNumber(event.target.value);
     }
 
@@ -51,6 +49,10 @@ export default function NewProblemModal(props) {
 
     function handleChangeDifficulty(event) {
         setDifficulty(event.target.value);
+    }*/
+
+    function handleChangeUrl(event) {
+        setUrl(event.target.value);
     }
 
     function handleChangeCurrentTag(event) {
@@ -61,10 +63,10 @@ export default function NewProblemModal(props) {
         setTags([...tags, currentTag]);
     }
 
-    function handleChangeDescription(content, delta, source, editor) {
+    /*function handleChangeDescription(content, delta, source, editor) {
         setDescription(editor.getText());
         setHtml(content);
-    }
+    }*/
 
     // Update problem list on HomeScreen and close SuccessModal
     function closeSuccessModal() {
@@ -107,7 +109,7 @@ export default function NewProblemModal(props) {
                 </Modal.Header>
 
                 <Modal.Body style={{paddingTop: "2.5%", paddingBottom: "2.5%", paddingRight: "5%", paddingLeft: "5%"}}>
-                    <Form.Label>Problem Number</Form.Label>
+                    {/* <Form.Label>Problem Number</Form.Label>
                     <Form.Control type="number" placeholder="Enter problem number..." style={formStyle} onChange={(event) => handleChangeNumber(event)}/>
                     <Form.Label>Problem Name</Form.Label>
                     <Form.Control type="text" placeholder="Enter problem name..." style={formStyle} onChange={(event) => handleChangeName(event)}/>
@@ -116,15 +118,18 @@ export default function NewProblemModal(props) {
                         <option value="1">Easy</option>
                         <option value="2">Medium</option>
                         <option value="3">Hard</option>
-                    </Form.Select>
+                    </Form.Select> */}
+                    <p>Grab the URL of the LeetCode problem you want to add. Also, add some tags to help you stay organized. For example, "Blind 75" or "Arrays".</p>
+                    <Form.Label>Problem URL</Form.Label>
+                    <Form.Control type="text" placeholder="Enter problem URL..." style={formStyle} onChange={(event) => handleChangeUrl(event)}/>
                     <Form.Label>Tags</Form.Label>
                     <div className="add-tag-form">
                         <Form.Control type="text" placeholder="Enter a tag..." style={{marginRight: "2.5%"}} onChange={(event) => handleChangeCurrentTag(event)}/>
                         <Button variant="dark" style={{width: "25%"}} onClick={() => handleChangeTags()}>Add</Button>
                     </div>
                     {tags.length ? tagList : null}
-                    <p>Enter problem text:</p>
-                    <ReactQuill theme="snow" style={formStyle} onChange={(content, delta, source, editor) => handleChangeDescription(content, delta, source, editor)}/>
+                    {/* <p>Enter problem text:</p>
+                    <ReactQuill theme="snow" style={formStyle} onChange={(content, delta, source, editor) => handleChangeDescription(content, delta, source, editor)}/> */}
                 </Modal.Body>
 
                 <Modal.Footer>
@@ -133,7 +138,7 @@ export default function NewProblemModal(props) {
                 </Modal.Footer>
             </Modal>
             <SuccessModal show={success} handleClose={closeSuccessModal} successMessage={"New Problem Added!"} 
-                bodyMessage={`New problem "` + number + ". " + name + `" has been successfully added to your problem list. You can now add solutions and run tests!`}/>
+                bodyMessage={`New problem has been successfully added to your problem list. You can now add solutions and run tests!`}/>
         </div>
     )
 }

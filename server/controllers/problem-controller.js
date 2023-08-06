@@ -4,8 +4,9 @@ const User = require('../models/user-model');
 const fs = require('fs'); 
 const jwt = require("jsonwebtoken");
 const { exec } = require("child_process");
+const browserObject = require('../browser');
 
-createProblem = (req, res) => {
+createProblem = async (req, res) => {
     const body = req.body;
     if (!body) {
         return res.status(400).json({
@@ -13,6 +14,38 @@ createProblem = (req, res) => {
             error: 'Missing request body.',
         })
     }
+
+    const browserInstance = await browserObject.startBrowser();
+    const page = await browserInstance.newPage();
+	
+	// On this new page:
+	// - open the url
+	// - wait until the dom content is loaded (HTML is ready)
+	await page.goto(req.body.url, {
+		waitUntil: "domcontentloaded",
+	});
+	
+    await page.waitForSelector(".flex.h-full.w-full.flex-1.flex-col");
+
+	// Get page data
+	const quotes = await page.evaluate(() => {
+        let body = document.querySelector(".flex.h-full.w-full.flex-1.flex-col");
+        let header = body.querySelector(".mr-2").innerText.split(".");
+        let number = header[0].trim();
+        let name = header[1].trim();
+        let difficulty = body.querySelector(".font-medium.capitalize").innerHTML;
+        let description = body.querySelector("._1l1MA").innerText;
+        let html = body.querySelector("._1l1MA").innerHTML;
+		return {number, name, difficulty, description, html};
+	});
+
+    const difficulty = {'Easy': 1, 'Medium': 2, 'Hard': 3};
+
+    body.number = quotes.number;
+    body.name = quotes.name;
+    body.difficulty = difficulty[quotes.difficulty];
+    body.description = quotes.description;
+    body.html = quotes.html;
 
     const problem = new Problem(body);
     if (!problem) {
