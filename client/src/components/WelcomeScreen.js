@@ -1,12 +1,18 @@
 import React from "react";
 import Button from 'react-bootstrap/Button';
+import { useNavigate } from "react-router-dom";
 
 export default function WelcomeScreen() {
+    const navigate = useNavigate();
 
     const buttonStyle = {
         width: "18%",
         fontSize: "1.8em",
         fontWeight: "bold"
+    }
+
+    function handleCreate() {
+        navigate("/create/");
     }
 
     return(
@@ -17,7 +23,7 @@ export default function WelcomeScreen() {
                 <div className="welcome-screen-buttons">
                     <Button variant="dark" size="lg" style={buttonStyle}>Log In</Button>
                     <p style={{marginBottom: 0, color: "white"}}>- or -</p>
-                    <Button variant="dark" className="orange-button" size="lg" style={buttonStyle}>Create Account</Button>
+                    <Button variant="dark" className="orange-button" size="lg" style={buttonStyle} onClick={() => handleCreate()}>Create Account</Button>
                 </div>
             </div>
             <div className="welcome-screen-options">
