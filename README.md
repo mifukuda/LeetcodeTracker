@@ -4,7 +4,7 @@
 ![Image of account creation screen](images/image2.png)
 ![Image of home screen](images/image3.png)
 
-To run and built the project, use the command:
+To run and build the project, use the command:
 ```
 sudo docker compose up --build --force-recreate
 ```
