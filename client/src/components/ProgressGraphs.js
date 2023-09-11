@@ -46,10 +46,10 @@ export default function ProgressGraphs(props) {
                 dateLabels.push(problemDate);
                 // new date: previous date's count + 1 if solution exists, count if solution does not exist
                 if(sortedProblems[i].solutions.length) {
-                    unsolvedCounts.push(counts[counts.length - 1] + 1);
+                    unsolvedCounts.push(unsolvedCounts[unsolvedCounts.length - 1] + 1);
                 }
                 else {
-                    unsolvedCounts.push(counts[counts.length - 1]);
+                    unsolvedCounts.push(unsolvedCounts[unsolvedCounts.length - 1]);
                 }
                 counts.push(counts[counts.length - 1] + 1);
             }
