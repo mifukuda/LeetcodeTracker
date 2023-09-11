@@ -6,6 +6,14 @@ const jwt = require("jsonwebtoken");
 const { exec } = require("child_process");
 const browserObject = require('../browser');
 
+// This is where we'll put the code to get around the tests.
+const preparePageForTests = async (page) => {
+    // Pass the User-Agent Test.
+    const userAgent = 'Mozilla/5.0 (X11; Linux x86_64)' +
+      'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.39 Safari/537.36';
+    await page.setUserAgent(userAgent);
+}
+
 createProblem = async (req, res) => {
     const body = req.body;
     if (!body) {
@@ -17,6 +25,7 @@ createProblem = async (req, res) => {
 
     const browserInstance = await browserObject.startBrowser();
     const page = await browserInstance.newPage();
+    await preparePageForTests(page);
 	
 	// On this new page:
 	// - open the url
@@ -34,8 +43,8 @@ createProblem = async (req, res) => {
         let number = header[0].trim();
         let name = header[1].trim();
         let difficulty = body.querySelector(".font-medium.capitalize").innerHTML;
-        let description = body.querySelector("._1l1MA").innerText;
-        let html = body.querySelector("._1l1MA").innerHTML;
+        let description = body.querySelector(".xFUwe").innerText;
+        let html = body.querySelector(".xFUwe").innerHTML;
 		return {number, name, difficulty, description, html};
 	});
 
@@ -54,7 +63,7 @@ createProblem = async (req, res) => {
 
     problem.ownerEmail = req.userEmail;
     problem.solutions = [];
-    problem.test = "# DO NOT DELETE THIS LINE\nfrom solution import Solution\n";
+    problem.test = "# DO NOT DELETE THIS LINE\nfrom solution import Solution\n\ndef test1():\n";
     console.log("creating problem: " + JSON.stringify(problem));
 
     problem

@@ -117,9 +117,6 @@ export default function ProblemScreen() {
                         <h3 className="tertiary-header">Description</h3>
                         <p className="explanation-text">View the details of your problem here. Go to the "Solutions" tab to add/run your coded solutions. Go to the "Tests" tab to add tests.</p>
                         <ReactQuill theme="bubble" readOnly={true} style={{height: '700px', border: '1px solid black'}} value={problem.html}/>
-                        <div className="edit-button">
-                            <Button variant="primary" size="lg" style={{display: "block", marginLeft: "auto", marginRight: "0", width: "20%", fontWeight: "bold"}}>&#9998; Edit</Button>
-                        </div>
                     </div>
                 </Tab>
                 {/* Solution tab: display list of solutions */}
