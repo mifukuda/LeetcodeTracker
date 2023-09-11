@@ -13,7 +13,7 @@ sudo docker compose up --build --force-recreate
 
 ![Image of progress graph](images/image4.png)
 
-### Enter problems by providing URL (automatically scraped from the LeetCode page) and view on the Home Screeb
+### Enter problems by providing URL (automatically scraped from the LeetCode page) and view on the Home Screen
 
 ![Image of entering problem](images/image5.png)
 ![Image of problem list](images/image6.png)
