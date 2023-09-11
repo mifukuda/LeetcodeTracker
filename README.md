@@ -25,6 +25,6 @@ sudo docker compose up --build --force-recreate
 ![Image of entering test](images/image9.png)
 ![Image of executing test](images/image10.png)
 
-Note: As of 9/10/2023, web scraping for current layout of LeetCode site. May be subject to change.
+Note: As of 9/10/2023, web scraping works for current layout of LeetCode site. May be subject to change.
 
 
